@@ -70,8 +70,6 @@ const Cardtask: React.FC<CardProps> = ({ Carde, user, team }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          titulo: data.titulo,
-          descricao: data.descricao,
           status: data.status,
           id_update_Card: 0, // Ajuste conforme necessário
           id_comentar: 0, // Ajuste conforme necessário
