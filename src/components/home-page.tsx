@@ -106,22 +106,12 @@ export const HomePage: React.FC<HomePageProps> = ({
             <UserButton user={self} />
           </div>
         </header>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
-          <Button variant="secondary">Filtrar</Button>
-          <div className="flex items-center bg-white dark:bg-gray-800 rounded-md shadow px-4 py-2 w-full">
-            <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-            <Input
-              className="pl-2 w-full bg-transparent text-gray-900 dark:text-gray-100"
-              placeholder="Busque por cards, assuntos ou responsáveis..."
-            />
-          </div>
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
               A fazer
             </h2>
-            <ScrollArea className="h-[600px] w-full rounded-md border">
+            <ScrollArea className="h-[700px] w-full ">
               {Cards.filter(
                 (card) =>
                   card.status === "Fazer" && card.id_equipe === Equipe.id
@@ -130,7 +120,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   key={card.id}
                   Carde={card}
                   user={Users.find((user) => user.id === card.id_resp)}
-                  team={Equipe} // Filtra o usuário responsável pelo card
+                  self={self} // Filtra o usuário responsável pelo card
                 />
               ))}
             </ScrollArea>
@@ -139,7 +129,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
               Fazendo
             </h2>
-            <ScrollArea className="h-[600px] w-full rounded-md border">
+            <ScrollArea className="h-[700px] w-full ">
               {Cards.filter(
                 (card) =>
                   card.status === "Fazendo" && card.id_equipe === Equipe.id
@@ -148,7 +138,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   key={card.id}
                   Carde={card}
                   user={Users.find((user) => user.id === card.id_resp)}
-                  team={Equipe} // Filtra o usuário responsável pelo card
+                  self={self} // Filtra o usuário responsável pelo card
                 />
               ))}
             </ScrollArea>
@@ -157,16 +147,16 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
               Feito
             </h2>
-            <ScrollArea className="h-[600px] w-full rounded-md border">
+            <ScrollArea className="h-[700px] w-full">
               {Cards.filter(
                 (card) =>
-                  card.status === "Feito" && card.id_equipe === Equipe.id
+                  card.status === "Finalizado" && card.id_equipe === Equipe.id
               ).map((card) => (
                 <Cardtask
                   key={card.id}
                   Carde={card}
                   user={Users.find((user) => user.id === card.id_resp)}
-                  team={Equipe} // Filtra o usuário responsável pelo card
+                  self={self} // Filtra o usuário responsável pelo card
                 />
               ))}
             </ScrollArea>
@@ -222,9 +212,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <FormItem>
                       <FormLabel>Selecione o responsavel pela tarefa</FormLabel>
                       <Select
-                        onValueChange={(value) =>
-                          field.onChange(parseInt(value))
-                        }
+                        onValueChange={(value) => field.onChange(value)}
                         value={field.value ? String(field.value) : ""}
                       >
                         <SelectTrigger>
