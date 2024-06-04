@@ -115,14 +115,29 @@ export const HomePage: React.FC<HomePageProps> = ({
               {Cards.filter(
                 (card) =>
                   card.status === "Fazer" && card.id_equipe === Equipe.id
-              ).map((card) => (
-                <Cardtask
-                  key={card.id}
-                  Carde={card}
-                  user={Users.find((user) => user.id === card.id_resp)}
-                  self={self} // Filtra o usuário responsável pelo card
-                />
-              ))}
+              ).map((card) => {
+                const foundUser = Users.find(
+                  (user) => user.id === card.id_resp
+                );
+                const defaultUser = {
+                  id: 0,
+                  email: "",
+                  name: "Unknown",
+                  image: null,
+                  id_cargoXuser: 0,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                };
+
+                return (
+                  <Cardtask
+                    key={card.id}
+                    Carde={card}
+                    user={foundUser || defaultUser}
+                    self={self} // Filtra o usuário responsável pelo card
+                  />
+                );
+              })}
             </ScrollArea>
           </div>
           <div>
@@ -133,14 +148,28 @@ export const HomePage: React.FC<HomePageProps> = ({
               {Cards.filter(
                 (card) =>
                   card.status === "Fazendo" && card.id_equipe === Equipe.id
-              ).map((card) => (
-                <Cardtask
-                  key={card.id}
-                  Carde={card}
-                  user={Users.find((user) => user.id === card.id_resp)}
-                  self={self} // Filtra o usuário responsável pelo card
-                />
-              ))}
+              ).map((card) => {
+                const foundUser = Users.find(
+                  (user) => user.id === card.id_resp
+                );
+                const defaultUser = {
+                  id: 0,
+                  email: "",
+                  name: "Unknown",
+                  image: null,
+                  id_cargoXuser: 0,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                };
+                return (
+                  <Cardtask
+                    key={card.id}
+                    Carde={card}
+                    user={foundUser || defaultUser}
+                    self={self} // Filtra o usuário responsável pelo card
+                  />
+                );
+              })}
             </ScrollArea>
           </div>
           <div>
@@ -151,14 +180,29 @@ export const HomePage: React.FC<HomePageProps> = ({
               {Cards.filter(
                 (card) =>
                   card.status === "Finalizado" && card.id_equipe === Equipe.id
-              ).map((card) => (
-                <Cardtask
-                  key={card.id}
-                  Carde={card}
-                  user={Users.find((user) => user.id === card.id_resp)}
-                  self={self} // Filtra o usuário responsável pelo card
-                />
-              ))}
+              ).map((card) => {
+                const foundUser = Users.find(
+                  (user) => user.id === card.id_resp
+                );
+                const defaultUser = {
+                  id: 0,
+                  email: "",
+                  name: "Unknown",
+                  image: null,
+                  id_cargoXuser: 0,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                };
+
+                return (
+                  <Cardtask
+                    key={card.id}
+                    Carde={card}
+                    user={foundUser || defaultUser}
+                    self={self} // Filtra o usuário responsável pelo card
+                  />
+                );
+              })}
             </ScrollArea>
           </div>
         </div>
