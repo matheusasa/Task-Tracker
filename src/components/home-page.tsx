@@ -103,7 +103,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         <SheetSide />
       </div>
       <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
-        <header className="flex flex-wrap justify-between items-center mb-10 w-full overflow-hidden sm:justify-center">
+        <header className="flex flex-wrap justify-between items-center mb-10 w-full overflow-hidden ">
           <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
             {Equipe.titulo}
           </h1>
