@@ -4,27 +4,25 @@ import { db } from "../../../../lib/db"; // Ajuste o caminho conforme necessári
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { id_card, status, id_update_Card } = body;
+    const { id_card, id_login, descricao } = body;
 
-    if (!id_card || !status || !id_update_Card) {
+    if (!id_card || !id_login || !descricao) {
       return new NextResponse("Campos faltando", { status: 400 });
     }
-    const updateCard = await db.tB_Card.update({
-      where: {
-        id: id_card,
-      },
+    const comentCard = await db.tb_Comentarios.create({
       data: {
-        status,
-        id_update_Card,
+        id_card,
+        id_login,
+        descricao,
       },
     });
 
     return NextResponse.json({
-      message: "Card atualizado com sucesso!",
-      tB_Card: updateCard,
+      message: "Comentario criado com sucesso!",
+      tB_Card: comentCard,
     });
   } catch (error) {
-    console.error("[UPDATE CARD]", error);
+    console.error("[COMENT CARD]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

@@ -39,27 +39,43 @@ import {
   SelectContent,
   Select,
 } from "@/components/ui/select";
-import { TB_Card, TB_Equipe, user } from "@prisma/client";
+import { TB_Card, Tb_Comentarios, TB_Equipe, user } from "@prisma/client";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type CardTaskValues = z.infer<typeof formSchema>;
+type CardComentValues = z.infer<typeof formSchema1>;
 
 interface CardProps {
   Carde: TB_Card;
   user: user;
   self: user;
+  coments: Tb_Comentarios[];
+  users: user[];
 }
 const formSchema = z.object({
   status: z.string().min(1),
 });
 
-const Cardtask: React.FC<CardProps> = ({ Carde, user, self }) => {
+const formSchema1 = z.object({
+  description: z.string().min(1),
+});
+
+const Cardtask: React.FC<CardProps> = ({
+  Carde,
+  user,
+  self,
+  coments,
+  users,
+}) => {
   const router = useRouter();
   const form = useForm<CardTaskValues>({
     resolver: zodResolver(formSchema),
+  });
+  const form1 = useForm<CardComentValues>({
+    resolver: zodResolver(formSchema1),
   });
   const onDelete = async () => {
     try {
@@ -103,14 +119,41 @@ const Cardtask: React.FC<CardProps> = ({ Carde, user, self }) => {
         throw new Error("Falha ao deletar o Card!");
       }
 
-      const deleteCard = await response.json();
-      console.log("Card criado com sucesso", deleteCard);
+      const updateCard = await response.json();
+      console.log("Card atualizado com sucesso", updateCard);
 
       router.refresh();
     } catch (error) {
-      console.error("Error creating card:", error);
+      console.error("Erro ao atualizar o card:", error);
     }
   };
+  const onComent = async (data: CardComentValues) => {
+    try {
+      const response = await fetch("/api/addComent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id_card: Carde.id,
+          descricao: data.description,
+          id_login: self.id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Falha comentar o Card!");
+      }
+
+      const comentCard = await response.json();
+      console.log("Comentario criado com sucesso", comentCard);
+
+      router.refresh();
+    } catch (error) {
+      console.error("Erro ao criar o comentario:", error);
+    }
+  };
+
   return (
     <Card className="mb-4 bg-white dark:bg-gray-800 dark:text-white">
       <CardHeader>
@@ -241,7 +284,7 @@ const Cardtask: React.FC<CardProps> = ({ Carde, user, self }) => {
                   </div>
                   <div>
                     <Label htmlFor="description">Descrição</Label>
-                    <Textarea rows={3}>{Carde.descricao}</Textarea>
+                    <p>{Carde.descricao}</p>
                   </div>
                   <div>
                     <Label>Responsavel</Label>
@@ -259,12 +302,56 @@ const Cardtask: React.FC<CardProps> = ({ Carde, user, self }) => {
                   </div>
                   <div>
                     <Label>Comentarios</Label>
-
-                    <Textarea
-                      id="comments"
-                      placeholder="Adicione um comentario"
-                      className="mt-4"
-                    />
+                  </div>
+                  <div>
+                    {coments
+                      .filter((coment) => coment.id_card === Carde.id)
+                      .map((coment) => {
+                        const foundUser = users.find(
+                          (u) => u.id === coment.id_login
+                        );
+                        return (
+                          <div key={coment.id} className="mb-4">
+                            <div className="flex items-center gap-2">
+                              <Avatar>
+                                <AvatarImage
+                                  src={
+                                    foundUser?.image || "/fallback-image.png"
+                                  }
+                                />
+                                <AvatarFallback>
+                                  {foundUser?.name}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div className="flex flex-col">
+                                <span className="font-medium">
+                                  {foundUser?.name}
+                                </span>
+                                <span>{coment.descricao}</span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <div>
+                    <Form {...form1}>
+                      <form onSubmit={form1.handleSubmit(onComent)}>
+                        <FormField
+                          control={form1.control}
+                          name="description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel> Deixar um comentario</FormLabel>
+                              <Textarea {...field} />
+                            </FormItem>
+                          )}
+                        />
+                        <div className="pt-4">
+                          <Button type="submit">Enviar</Button>
+                        </div>
+                      </form>
+                    </Form>
                   </div>
                 </div>
                 <DialogFooter>

@@ -19,7 +19,6 @@ model TB_Card {
   id_resp        Int
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
-  Rl_Comentar    Rl_Comentar[]
   Rl_update_Card Rl_update_Card[]
   TB_Equipe      TB_Equipe        @relation(fields: [id_equipe], references: [id])
 
@@ -27,25 +26,12 @@ model TB_Card {
 }
 
 model Tb_Comentarios {
-  id          Int           @id @default(autoincrement())
-  descricao   String
-  id_login    Int
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  Rl_Comentar Rl_Comentar[]
-}
-
-model Rl_Comentar {
-  id             Int            @id @default(autoincrement())
-  id_card        Int
-  id_comentario  Int
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  TB_Card        TB_Card        @relation(fields: [id_card], references: [id])
-  Tb_Comentarios Tb_Comentarios @relation(fields: [id_comentario], references: [id])
-
-  @@index([id_card], map: "Rl_Comentar_id_card_fkey")
-  @@index([id_comentario], map: "Rl_Comentar_id_comentario_fkey")
+  id        Int      @id @default(autoincrement())
+  descricao String
+  id_login  Int
+  id_card   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Rl_update_Card {

@@ -38,6 +38,7 @@ export default async function Home() {
       id_equipe: equip?.id,
     },
   });
+  const coments = await db.tb_Comentarios.findMany({});
   if (!equip) {
     return <DialogUser emailgit={email} image={image} />;
   }
@@ -49,7 +50,13 @@ export default async function Home() {
   });
   return (
     <div className="">
-      <HomePage Users={users} Equipe={equip} self={user} Cards={cards} />
+      <HomePage
+        Users={users}
+        Equipe={equip}
+        self={user}
+        Cards={cards}
+        coments={coments}
+      />
     </div>
   );
 }

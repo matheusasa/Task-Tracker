@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label";
 import { Aside } from "./aside";
 import { ModeToggle } from "./darkmode";
 import UserButton from "./userbutton";
-import { TB_Card, TB_Equipe, user } from "@prisma/client";
+import { TB_Card, Tb_Comentarios, TB_Equipe, user } from "@prisma/client";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -42,6 +42,7 @@ interface HomePageProps {
   Equipe: TB_Equipe;
   self: user;
   Cards: TB_Card[];
+  coments: Tb_Comentarios[];
 }
 
 const formSchema = z.object({
@@ -56,6 +57,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   Equipe,
   self,
   Cards,
+  coments,
 }) => {
   const router = useRouter();
   const form = useForm<CardFormValues>({
@@ -139,7 +141,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     key={card.id}
                     Carde={card}
                     user={foundUser || defaultUser}
-                    self={self} // Filtra o usuário responsável pelo card
+                    self={self}
+                    coments={coments}
+                    users={Users} // Filtra o usuário responsável pelo card
                   />
                 );
               })}
@@ -171,7 +175,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     key={card.id}
                     Carde={card}
                     user={foundUser || defaultUser}
-                    self={self} // Filtra o usuário responsável pelo card
+                    self={self}
+                    coments={coments}
+                    users={Users} // Filtra o usuário responsável pelo card
                   />
                 );
               })}
@@ -204,7 +210,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     key={card.id}
                     Carde={card}
                     user={foundUser || defaultUser}
-                    self={self} // Filtra o usuário responsável pelo card
+                    self={self}
+                    coments={coments}
+                    users={Users} // Filtra o usuário responsável pelo card
                   />
                 );
               })}
@@ -307,8 +315,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <Button className="mr-2" variant="secondary">
                       Cancelar
                     </Button>
+                    <Button type="submit">Criar tarefa</Button>
                   </DialogClose>
-                  <Button type="submit">Criar tarefa</Button>
                 </DialogFooter>
               </form>
             </Form>
