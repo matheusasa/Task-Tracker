@@ -323,11 +323,19 @@ const Cardtask: React.FC<CardProps> = ({
                                   {foundUser?.name}
                                 </AvatarFallback>
                               </Avatar>
-                              <div className="flex flex-col">
-                                <span className="font-medium">
-                                  {foundUser?.name}
+                              <div className="flex justify-between w-full">
+                                <div className="flex flex-col">
+                                  <span className="font-medium">
+                                    {foundUser?.name}
+                                  </span>
+                                  <span>{coment.descricao}</span>
+                                </div>
+                                <span className="text-right">
+                                  {coment.createdAt.toLocaleString("pt-BR", {
+                                    dateStyle: "short",
+                                    timeStyle: "short",
+                                  })}
                                 </span>
-                                <span>{coment.descricao}</span>
                               </div>
                             </div>
                           </div>
