@@ -33,6 +33,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import Cardtask from "./cardtask";
+import { SheetSide } from "./asidemobile";
 
 type CardFormValues = z.infer<typeof formSchema>;
 
@@ -94,15 +95,19 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      <Aside />
+    <div className="flex flex-col md:flex-row h-screen w-full">
+      <div className="hidden md:block lg:block">
+        <Aside />
+      </div>
+      <div className="block md:hidden lg:hidden">
+        <SheetSide />
+      </div>
       <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
-        <header className="flex justify-between items-center mb-10">
+        <header className="flex flex-wrap justify-between items-center mb-10 w-full overflow-hidden sm:justify-center">
           <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
             {Equipe.titulo}
           </h1>
           <div className="flex items-center space-x-4">
-            <ModeToggle />
             <UserButton user={self} />
           </div>
         </header>

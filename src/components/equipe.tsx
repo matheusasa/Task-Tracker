@@ -48,6 +48,9 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { SheetSide } from "./asidemobile";
+import UserButton from "./userbutton";
 
 type TeamFormValues = z.infer<typeof formSchema>;
 
@@ -55,6 +58,7 @@ interface EquipesProps {
   Users: user[];
   Equipe: TB_Equipe[];
   Cards: TB_Card[];
+  self: user;
 }
 const formSchema = z.object({
   name: z.string().min(2),
@@ -62,7 +66,7 @@ const formSchema = z.object({
   setor: z.string().min(1),
 });
 
-const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards }) => {
+const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
   const router = useRouter();
   const form = useForm<TeamFormValues>({
     resolver: zodResolver(formSchema),
@@ -98,7 +102,12 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards }) => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <Aside />
+      <div className="hidden md:block lg:block">
+        <Aside />
+      </div>
+      <div className="block md:hidden lg:hidden">
+        <SheetSide />
+      </div>
       <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
         <header className="flex justify-between items-center mb-10">
           <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
@@ -111,6 +120,7 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards }) => {
             >
               <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
             </Toggle>
+            <UserButton user={self} />
           </div>
         </header>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
@@ -255,31 +265,30 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards }) => {
                         <div>
                           <h3 className="text-lg font-medium">Participantes</h3>
                           <div className="flex items-center gap-4 mt-2">
-                            {teamMembers.map((member) => (
-                              <div
-                                key={member.id}
-                                className="flex items-center gap-4"
-                              >
-                                <Avatar>
-                                  <AvatarImage
-                                    alt={member.name}
-                                    src={
-                                      member.image ||
-                                      "/placeholder.svg?height=32&width=32"
-                                    }
-                                  />
-                                  <AvatarFallback>
-                                    {member.name[0]}
-                                  </AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <p className="font-medium">{member.name}</p>
-                                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    {member.id_cargoXuser}
-                                  </p>
+                            <ScrollArea className="h-[170px] w-full">
+                              {teamMembers.map((member) => (
+                                <div
+                                  key={member.id}
+                                  className="flex items-center gap-4 py-2"
+                                >
+                                  <Avatar>
+                                    <AvatarImage
+                                      alt={member.name}
+                                      src={
+                                        member.image ||
+                                        "/placeholder.svg?height=32&width=32"
+                                      }
+                                    />
+                                    <AvatarFallback>
+                                      {member.name[0]}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div>
+                                    <p className="font-medium">{member.name}</p>
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))}
+                            </ScrollArea>
                           </div>
                         </div>
                         <div>
@@ -287,29 +296,33 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards }) => {
                             Tarefas em Andamento
                           </h3>
                           <div className="grid gap-4 mt-2">
-                            {teamTasks.map((task) => (
-                              <Card key={task.id}>
-                                <CardContent>
-                                  <div className="flex items-center justify-between">
-                                    <p className="font-medium">{task.titulo}</p>
-                                    <Badge
-                                      className={`${
-                                        task.status === "Fazendo"
-                                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
-                                          : task.status === "Finalizado"
-                                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                                          : task.status === "Fazer"
-                                          ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100"
-                                          : ""
-                                      }`}
-                                      variant="outline"
-                                    >
-                                      {task.status}
-                                    </Badge>
-                                  </div>
-                                </CardContent>
-                              </Card>
-                            ))}
+                            <ScrollArea className="h-[170px] w-full">
+                              {teamTasks.map((task) => (
+                                <Card key={task.id}>
+                                  <CardContent>
+                                    <div className="flex items-center pt-2 justify-between">
+                                      <p className="font-medium">
+                                        {task.titulo}
+                                      </p>
+                                      <Badge
+                                        className={`${
+                                          task.status === "Fazendo"
+                                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
+                                            : task.status === "Finalizado"
+                                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
+                                            : task.status === "Fazer"
+                                            ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100"
+                                            : ""
+                                        }`}
+                                        variant="outline"
+                                      >
+                                        {task.status}
+                                      </Badge>
+                                    </div>
+                                  </CardContent>
+                                </Card>
+                              ))}
+                            </ScrollArea>
                           </div>
                         </div>
                       </div>
