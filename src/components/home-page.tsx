@@ -311,7 +311,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   )}
                 />
                 <DialogFooter>
-                  <DialogClose asChild>
+                  <DialogClose>
                     <Button className="mr-2" variant="secondary">
                       Cancelar
                     </Button>
