@@ -312,12 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 />
                 <DialogFooter>
                   <DialogClose asChild>
-                    <>
-                      <Button className="mr-2" variant="secondary">
-                        Cancelar
-                      </Button>
-                      <Button type="submit">Criar tarefa</Button>
-                    </>
+                    <Button type="submit">Criar tarefa</Button>
                   </DialogClose>
                 </DialogFooter>
               </form>
