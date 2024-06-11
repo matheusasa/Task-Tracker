@@ -17,7 +17,7 @@ const SHEET_SIDE = "left";
 
 export function SheetSide() {
   return (
-    <div className=" p-3 bg-[#6C5CE7] h-[70px]">
+    <div className=" p-3 bg-logo h-[70px]">
       <Sheet>
         <SheetTrigger asChild>
           <div className="pl-3">
@@ -25,7 +25,7 @@ export function SheetSide() {
           </div>
         </SheetTrigger>
         <SheetContent side={SHEET_SIDE}>
-          <div className="w-full p-6 bg-[#6C5CE7]  text-white flex flex-col h-full">
+          <div className="w-full p-6 bg-logo  text-white flex flex-col h-full">
             <div className="flex items-center space-x-2 mb-10">
               <span className="font-bold text-xl">Task Tracker </span>
             </div>
@@ -40,18 +40,6 @@ export function SheetSide() {
                 <Users className="h-9 w-9" />
                 <span className="text-3xl">
                   <Link href="/teamwork">Equipes</Link>{" "}
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <BarChart className="h-9 w-9" />
-                <span className="text-3xl">
-                  <Link href="/relatorios">Relatórios</Link>{" "}
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Bolt className="h-9 w-9" />
-                <span className="text-3xl">
-                  <Link href="/settings">Ajustes</Link>{" "}
                 </span>
               </div>
             </nav>
