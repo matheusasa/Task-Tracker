@@ -5,21 +5,33 @@ import { signIn } from "next-auth/react";
 
 export default function LoginButton() {
   return (
-    <div className="p-10 flex flex-col">
-      <Button
-        onClick={() => {
-          signIn("github", { callbackUrl: "/" });
-        }}
-      >
-        Login com GitHub
-      </Button>
-      <Button
-        onClick={() => {
-          signIn("google", { callbackUrl: "/" });
-        }}
-      >
-        Login com Google
-      </Button>
+    <div className="text-white">
+      <div className="space-y-2">
+        <div className="flex items-center justify-center py-4 ">
+          <Button
+            size="vd"
+            variant="corroxo"
+            onClick={() => {
+              signIn("google", { callbackUrl: "/" });
+            }}
+          >
+            Logar com Google
+          </Button>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="flex items-center justify-center">
+          <Button
+            size="vd"
+            variant="corroxo"
+            onClick={() => {
+              signIn("github", { callbackUrl: "/" });
+            }}
+          >
+            Logar com GitHub
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,45 +1,37 @@
-import {
-  Airplay,
-  BarChart,
-  Bolt,
-  Ellipsis,
-  LayoutDashboard,
-  Users,
-} from "lucide-react";
+import { BarChart4, Command, Settings, Users } from "lucide-react";
 import Link from "next/link";
+import profilePic from "../../public/logo.png";
+import Image from "next/image";
 
 export function Aside() {
   return (
-    <div className="w-full md:w-64 bg-[#6C5CE7] md:h-full p-6 text-white flex flex-col h-full">
-      <div className="flex items-center space-x-2 mb-10">
-        <span className="font-bold text-xl">Task Tracker </span>
+    <div className="bg-logo text-white flex-auto w-[300px] h-screen  p-2 ">
+      {" "}
+      {/* Ajustar - a logo não ta fixa */}
+      <div className="flex justify-center">
+        <Link href="/">
+          <Image src={profilePic} alt="logo" width={200} height={200} />
+        </Link>
       </div>
-      <nav className="flex flex-col space-y-4">
-        <div className="flex items-center space-x-2">
-          <LayoutDashboard className="h-6 w-6" />
-          <span>
-            <Link href="/">Boards</Link>
-          </span>
+      <div>
+        <div className=" mb-[60px] ml-[40px] text-xl font-aleo ">
+          <Link href="/"> Task Tracker</Link>{" "}
         </div>
-        <div className="flex items-center space-x-2">
-          <Users className="h-6 w-6" />
-          <span>
-            <Link href="/teamwork">Equipes</Link>{" "}
-          </span>
+        <div className="ml-7 space-y-5">
+          <div className="flex h-8 items-center pl-3 w-[230px] bg-transparent hover:bg-houver  rounded-lg overflow-hidden">
+            <Command className="m-0 p-0" />
+            <Link href="/">
+              <span className="ml-4">Boards</span>
+            </Link>
+          </div>
+          <div className="flex w-[230px] h-8 items-center pl-3 bg-transparent hover:bg-houver  rounded-lg overflow-hidden">
+            <Users />
+            <Link href="teamwork">
+              <span className="ml-4">Equipes</span>
+            </Link>
+          </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <BarChart className="h-6 w-6" />
-          <span>
-            <Link href="/relatorios">Relatórios</Link>{" "}
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Bolt className="h-6 w-6" />
-          <span>
-            <Link href="/settings">Ajustes</Link>{" "}
-          </span>
-        </div>
-      </nav>
+      </div>
     </div>
   );
 }

@@ -192,7 +192,7 @@ const Cardtask: React.FC<CardProps> = ({
       </CardHeader>
       <CardContent>{Carde.descricao}</CardContent>
       <CardFooter>
-        <div className="flex">
+        <div className="flex justify-between w-full">
           <Avatar>
             <AvatarImage src={user.image || "/fallback-image.png"} />
             <AvatarFallback>{user.name}</AvatarFallback>
