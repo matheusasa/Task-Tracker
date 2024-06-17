@@ -122,14 +122,13 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
             </Toggle>
             <UserButton user={self} />
           </div>
-          
         </header>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
           <Dialog>
             <DialogTrigger asChild>
               <Button className="fixed bottom-6 rigt-6 md:bottom-8 md:right-8 bg-logo">
-                <Plus className="h-6 w-6"/>
-                <span className="sr-only">Criar Equipe  </span>
+                <Plus className="h-6 w-6" />
+                <span className="sr-only">Criar Equipe </span>
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -210,10 +209,6 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
               </Form>
             </DialogContent>
           </Dialog>
-          <div className="flex ml-10 text-[17px]">
-          Filtrar <span className="ml-11"> <Search size={20} color="#A9A9A9"/></span>
-          <div><Input className="w-[1000px] h-[32px] p-2 border-2 bg-search"/></div>
-          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Equipe.map((team) => {
@@ -244,7 +239,7 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
                         <AvatarFallback>{member.name[0]}</AvatarFallback>
                       </Avatar>
                     ))}
-                  </div >
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <p>{team.descricao}</p>
@@ -254,84 +249,89 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
                     {teamMembers.length} membros
                   </Badge>
                   <div className="flex justify-end">
-                    <Dialog >
-                    <DialogTrigger asChild>
-                      <Button variant="secondary">Ver detalhes</Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-xl">
-                      <DialogHeader>
-                        <DialogTitle>{team.titulo}</DialogTitle>
-                        <DialogDescription>{team.descricao}</DialogDescription>
-                      </DialogHeader>
-                      <div className="grid gap-6">
-                        <div>
-                          <h3 className="text-lg font-medium">Participantes</h3>
-                          <div className="flex items-center gap-4 mt-2">
-                            <ScrollArea className="h-[170px] w-full">
-                              {teamMembers.map((member) => (
-                                <div
-                                  key={member.id}
-                                  className="flex items-center gap-4 py-2"
-                                >
-                                  <Avatar>
-                                    <AvatarImage
-                                      alt={member.name}
-                                      src={
-                                        member.image ||
-                                        "/placeholder.svg?height=32&width=32"
-                                      }
-                                    />
-                                    <AvatarFallback>
-                                      {member.name[0]}
-                                    </AvatarFallback>
-                                  </Avatar>
-                                  <div>
-                                    <p className="font-medium">{member.name}</p>
-                                  </div>
-                                </div>
-                              ))}
-                            </ScrollArea>
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium">
-                            Tarefas em Andamento
-                          </h3>
-                          <div className="grid gap-4 mt-2">
-                            <ScrollArea className="h-[170px] w-full">
-                              {teamTasks.map((task) => (
-                                <Card key={task.id}>
-                                  <CardContent>
-                                    <div className="flex items-center pt-2 justify-between">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary">Ver detalhes</Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-xl">
+                        <DialogHeader>
+                          <DialogTitle>{team.titulo}</DialogTitle>
+                          <DialogDescription>
+                            {team.descricao}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-6">
+                          <div>
+                            <h3 className="text-lg font-medium">
+                              Participantes
+                            </h3>
+                            <div className="flex items-center gap-4 mt-2">
+                              <ScrollArea className="h-[170px] w-full">
+                                {teamMembers.map((member) => (
+                                  <div
+                                    key={member.id}
+                                    className="flex items-center gap-4 py-2"
+                                  >
+                                    <Avatar>
+                                      <AvatarImage
+                                        alt={member.name}
+                                        src={
+                                          member.image ||
+                                          "/placeholder.svg?height=32&width=32"
+                                        }
+                                      />
+                                      <AvatarFallback>
+                                        {member.name[0]}
+                                      </AvatarFallback>
+                                    </Avatar>
+                                    <div>
                                       <p className="font-medium">
-                                        {task.titulo}
+                                        {member.name}
                                       </p>
-                                      <Badge
-                                        className={`${
-                                          task.status === "Fazendo"
-                                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
-                                            : task.status === "Finalizado"
-                                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                                            : task.status === "Fazer"
-                                            ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100"
-                                            : ""
-                                        }`}
-                                        variant="outline"
-                                      >
-                                        {task.status}
-                                      </Badge>
                                     </div>
-                                  </CardContent>
-                                </Card>
-                              ))}
-                            </ScrollArea>
+                                  </div>
+                                ))}
+                              </ScrollArea>
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-medium">
+                              Tarefas em Andamento
+                            </h3>
+                            <div className="grid gap-4 mt-2">
+                              <ScrollArea className="h-[170px] w-full">
+                                {teamTasks.map((task) => (
+                                  <Card key={task.id}>
+                                    <CardContent>
+                                      <div className="flex items-center pt-2 justify-between">
+                                        <p className="font-medium">
+                                          {task.titulo}
+                                        </p>
+                                        <Badge
+                                          className={`${
+                                            task.status === "Fazendo"
+                                              ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
+                                              : task.status === "Finalizado"
+                                              ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
+                                              : task.status === "Fazer"
+                                              ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100"
+                                              : ""
+                                          }`}
+                                          variant="outline"
+                                        >
+                                          {task.status}
+                                        </Badge>
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                ))}
+                              </ScrollArea>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                      </DialogContent>
+                    </Dialog>
                   </div>
-                  
                 </CardFooter>
               </Card>
             );
