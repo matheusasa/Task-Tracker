@@ -155,15 +155,15 @@ const Cardtask: React.FC<CardProps> = ({
   };
 
   return (
-    <Card className="mb-4 bg-white dark:bg-gray-800 dark:text-white">
+    <Card className="mb-4 bg-white dark:bg-gray-800 dark:text-white text-sm ">
       <CardHeader>
-        <CardTitle>
+        <CardTitle className="text-base">
           {Carde.titulo}
           <div className="flex justify-end">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost">
-                  <Trash2 />
+                  <Trash2 size={18}/>
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
@@ -190,15 +190,15 @@ const Cardtask: React.FC<CardProps> = ({
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent>{Carde.descricao}</CardContent>
+      <CardContent >{Carde.descricao}</CardContent>
       <CardFooter>
         <div className="flex justify-between w-full">
-          <Avatar>
-            <AvatarImage src={user.image || "/fallback-image.png"} />
+          <Avatar className="size-8 ">
+            <AvatarImage src={user.image || "/fallback-image.png"}/>
             <AvatarFallback>{user.name}</AvatarFallback>
           </Avatar>
 
-          <div className="pl-[40px]">
+          <div className="pl-[40px] ">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost">Alterar status</Button>
@@ -246,7 +246,7 @@ const Cardtask: React.FC<CardProps> = ({
                           <Button variant="outline">Cancelar</Button>
                         </div>
                         <div className="px-5">
-                          <Button type="submit">Atualizar</Button>
+                          <Button type="submit" className="bg-logo">Atualizar</Button>
                         </div>
                       </div>
                     </DialogClose>
@@ -259,7 +259,7 @@ const Cardtask: React.FC<CardProps> = ({
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost">
-                  <Eye />
+                  <Eye size={22}/>
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[600px]">
@@ -355,8 +355,8 @@ const Cardtask: React.FC<CardProps> = ({
                             </FormItem>
                           )}
                         />
-                        <div className="pt-4">
-                          <Button type="submit">Enviar</Button>
+                        <div className="pt-4 ">
+                          <Button type="submit" className="bg-logo ">Enviar</Button>
                         </div>
                       </form>
                     </Form>

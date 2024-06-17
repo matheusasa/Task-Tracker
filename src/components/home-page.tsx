@@ -97,16 +97,17 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen w-full">
-      <div className="hidden md:block lg:block">
+    <div className="h-screen flex flex-col sm:h-full md:h-full lg:h-full xl:h-full 2xl:h-full">
+      <div className="flex flex-col md:flex-row h-screen w-full ">
+      <div className="hidden md:block lg:block h-screen">
         <Aside />
       </div>
-      <div className="block md:hidden lg:hidden">
+      <div className="block md:hidden lg:hidden mt-9 h-[calc(100vh - 100px)] flex flex-col justify-center">
         <SheetSide />
       </div>
-      <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
-        <header className="flex flex-wrap justify-between items-center mb-10 w-full overflow-hidden ">
-          <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
+      <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900 overflow-y-auto">
+        <header className="flex justify-between items-center mb-10 ml">
+          <h1 className="text-3xl font-aleo  text-[#2D3436] dark:text-white mb-6">
             {Equipe.titulo}
           </h1>
           <div className="flex items-center space-x-4">
@@ -115,7 +116,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </header>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
+            <h2 className="  font-semibold mb-4 text-[#2D3436] dark:text-white">
               A fazer
             </h2>
             <ScrollArea className="h-[700px] w-full ">
@@ -150,7 +151,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </ScrollArea>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
+            <h2 className="font-semibold mb-4 text-[#2D3436] dark:text-white">
               Fazendo
             </h2>
             <ScrollArea className="h-[700px] w-full ">
@@ -184,7 +185,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </ScrollArea>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-[#2D3436] dark:text-white">
+            <h2 className="font-semibold mb-4 text-[#2D3436] dark:text-white">
               Feito
             </h2>
             <ScrollArea className="h-[700px] w-full">
@@ -221,12 +222,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="fixed bottom-6 right-6 md:bottom-8 md:right-8">
+            <Button className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-logo">
               <Plus className="h-6 w-6" />
               <span className="sr-only">Criar tarefa</span>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-md ">
             <DialogHeader>
               <DialogTitle>Criar uma nova tarefa</DialogTitle>
               <DialogDescription>
@@ -310,9 +311,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </FormItem>
                   )}
                 />
-                <DialogFooter>
+                <DialogFooter >
                   <DialogClose asChild>
-                    <Button type="submit">Criar tarefa</Button>
+                    <Button type="submit" className="bg-logo">Criar tarefa</Button>
                   </DialogClose>
                 </DialogFooter>
               </form>
@@ -321,5 +322,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         </Dialog>
       </main>
     </div>
-  );
+</div>
+      );
 };

@@ -102,15 +102,15 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <div className="hidden md:block lg:block">
+      <div className="hidden md:block lg:block ">
         <Aside />
       </div>
       <div className="block md:hidden lg:hidden">
         <SheetSide />
       </div>
       <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
-        <header className="flex justify-between items-center mb-10">
-          <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
+        <header className="flex justify-between items-center mb-10 ml">
+          <h1 className="text-3xl font-aleo text-[#2D3436] dark:text-white ml-[60px]">
             Equipes
           </h1>
           <div className="flex items-center space-x-4">
@@ -122,11 +122,15 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
             </Toggle>
             <UserButton user={self} />
           </div>
+          
         </header>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="secondary">Criar Equipe</Button>
+              <Button className="fixed bottom-6 rigt-6 md:bottom-8 md:right-8 bg-logo">
+                <Plus className="h-6 w-6"/>
+                <span className="sr-only">Criar Equipe  </span>
+              </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
@@ -206,12 +210,9 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
               </Form>
             </DialogContent>
           </Dialog>
-          <div className="flex items-center bg-white dark:bg-gray-800 rounded-md shadow px-4 py-2 w-full">
-            <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-            <Input
-              className="pl-2 w-full bg-transparent text-gray-900 dark:text-gray-100"
-              placeholder="Busque por equipes..."
-            />
+          <div className="flex ml-10 text-[17px]">
+          Filtrar <span className="ml-11"> <Search size={20} color="#A9A9A9"/></span>
+          <div><Input className="w-[1000px] h-[32px] p-2 border-2 bg-search"/></div>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -226,13 +227,13 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
             return (
               <Card
                 key={team.id}
-                className="bg-white dark:bg-gray-800 dark:text-white"
+                className="bg-white dark:bg-gray-800 dark:text-white  text-sm"
               >
                 <CardHeader>
-                  <CardTitle>{team.titulo}</CardTitle>
+                  <CardTitle className="text-base">{team.titulo}</CardTitle>
                   <div className="flex items-center space-x-2">
                     {teamMembers.map((member) => (
-                      <Avatar key={member.id}>
+                      <Avatar key={member.id} className="size-8">
                         <AvatarImage
                           alt={member.name}
                           src={
@@ -243,7 +244,7 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
                         <AvatarFallback>{member.name[0]}</AvatarFallback>
                       </Avatar>
                     ))}
-                  </div>
+                  </div >
                 </CardHeader>
                 <CardContent>
                   <p>{team.descricao}</p>
@@ -252,7 +253,8 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
                   <Badge variant="secondary">
                     {teamMembers.length} membros
                   </Badge>
-                  <Dialog>
+                  <div className="flex justify-end">
+                    <Dialog >
                     <DialogTrigger asChild>
                       <Button variant="secondary">Ver detalhes</Button>
                     </DialogTrigger>
@@ -328,6 +330,8 @@ const Equipes: React.FC<EquipesProps> = ({ Users, Equipe, Cards, self }) => {
                       </div>
                     </DialogContent>
                   </Dialog>
+                  </div>
+                  
                 </CardFooter>
               </Card>
             );

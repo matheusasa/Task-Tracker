@@ -38,7 +38,7 @@ export default function Relatorio() {
       <main className="flex-1 p-6 md:p-8 bg-[#F4F7FD] dark:bg-gray-900">
         <header className="flex justify-between items-center mb-10">
           <h1 className="text-4xl font-bold text-[#2D3436] dark:text-white">
-            Relatórios
+            Relatórios.
           </h1>
           <div className="flex items-center space-x-4">
             <Toggle
